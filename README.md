@@ -50,7 +50,8 @@ const SUPABASE_CONFIG = {
 
 - `config.js` 파일은 `.gitignore`에 포함되어 있어 Git에 커밋되지 않습니다.
 - Supabase Publishable Key는 클라이언트에 노출되어도 안전하지만, 보안을 위해 별도 파일로 관리하는 것을 권장합니다.
-- 배포 시에는 환경 변수나 배포 플랫폼의 설정 기능을 사용하세요.
+- **Vercel 배포 시**: 환경 변수를 사용하여 키를 안전하게 관리하세요.
+- **로컬 개발 시**: `config.js` 파일을 사용하세요.
 
 ## 🛠 기술 스택
 
@@ -68,6 +69,9 @@ my-card-game/
 ├── game.js             # 게임 로직 및 Canvas 렌더링
 ├── config.example.js   # Supabase 설정 예제 파일
 ├── config.js           # Supabase 설정 파일 (로컬에서 생성, .gitignore)
+├── build.js            # Vercel 빌드 스크립트 (환경 변수 주입)
+├── package.json        # Node.js 패키지 설정
+├── vercel.json         # Vercel 배포 설정
 ├── .gitignore          # Git 무시 파일 목록
 └── README.md           # 프로젝트 설명
 ```
@@ -85,8 +89,35 @@ my-card-game/
 
 ## 🔗 배포
 
-이 프로젝트는 정적 웹사이트이므로 다음 플랫폼에 배포할 수 있습니다:
-- [Vercel](https://vercel.com)
-- [Netlify](https://netlify.com)
-- [GitHub Pages](https://pages.github.com)
-- [Cloudflare Pages](https://pages.cloudflare.com)
+### Vercel 배포 방법
+
+1. **GitHub 저장소를 Vercel에 연결**
+   - [Vercel](https://vercel.com)에 로그인
+   - "New Project" 클릭
+   - GitHub 저장소 선택
+
+2. **환경 변수 설정**
+   - Vercel 프로젝트 설정 → Environment Variables
+   - 다음 환경 변수 추가:
+     ```
+     NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+     NEXT_PUBLIC_SUPABASE_KEY=sb_publishable_your_key_here
+     ```
+   - 또는 다음 이름도 지원:
+     ```
+     VITE_SUPABASE_URL
+     VITE_SUPABASE_KEY
+     SUPABASE_URL
+     SUPABASE_KEY
+     ```
+
+3. **배포**
+   - 환경 변수 설정 후 자동으로 재배포됩니다
+   - 빌드 시 환경 변수가 HTML에 자동 주입됩니다
+
+### 기타 플랫폼
+
+이 프로젝트는 정적 웹사이트이므로 다음 플랫폼에도 배포할 수 있습니다:
+- [Netlify](https://netlify.com) - 환경 변수 설정 필요
+- [GitHub Pages](https://pages.github.com) - config.js 파일 필요
+- [Cloudflare Pages](https://pages.cloudflare.com) - 환경 변수 설정 필요

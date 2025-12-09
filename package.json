@@ -1,0 +1,11 @@
+{
+  "name": "card-flip-game",
+  "version": "1.0.0",
+  "description": "카드 뒤집기 게임",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": ["game", "card", "memory"],
+  "author": "",
+  "license": "MIT"
+}

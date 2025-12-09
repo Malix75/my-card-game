@@ -1,11 +1,23 @@
-// Supabase 설정 (config.js에서 로드)
-// config.js 파일이 없으면 config.example.js를 참고하여 생성하세요.
+// Supabase 설정
+// 우선순위: 1) Vercel 환경 변수 (window.SUPABASE_CONFIG) 2) 로컬 config.js (SUPABASE_CONFIG)
 let supabase;
 try {
-    if (typeof SUPABASE_CONFIG !== 'undefined') {
-        supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
+    let supabaseConfig = null;
+    
+    // Vercel 환경 변수 확인 (window 객체에 주입됨)
+    if (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.url && window.SUPABASE_CONFIG.key) {
+        supabaseConfig = window.SUPABASE_CONFIG;
+    }
+    // 로컬 config.js 확인
+    else if (typeof SUPABASE_CONFIG !== 'undefined' && SUPABASE_CONFIG.url && SUPABASE_CONFIG.key) {
+        supabaseConfig = SUPABASE_CONFIG;
+    }
+    
+    if (supabaseConfig) {
+        supabase = window.supabase.createClient(supabaseConfig.url, supabaseConfig.key);
+        console.log('Supabase 초기화 성공');
     } else {
-        console.warn('Supabase 설정이 없습니다. config.js 파일을 확인하세요.');
+        console.warn('Supabase 설정이 없습니다. Vercel 환경 변수 또는 config.js 파일을 확인하세요.');
         // Supabase 기능을 사용하지 않는 경우를 위한 더미 객체
         supabase = {
             from: () => ({
