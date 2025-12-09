@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드 뒤집기 게임</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎴 카드 뒤집기 게임</h1>
+        <div class="game-info">
+            <div class="info-item">
+                <span>시도 횟수: </span>
+                <span id="attempts">0</span>
+            </div>
+            <div class="info-item">
+                <span>매칭: </span>
+                <span id="matches">0</span> / <span id="totalPairs">8</span>
+            </div>
+            <div class="info-item">
+                <span>시간: </span>
+                <span id="timer">0</span>초
+            </div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div class="controls">
+            <button id="resetBtn">게임 다시 시작</button>
+            <button id="leaderboardBtn">리더보드 보기</button>
+        </div>
+        <div id="gameOver" class="game-over hidden">
+            <h2>🎉 게임 완료!</h2>
+            <p>시도 횟수: <span id="finalAttempts">0</span></p>
+            <p>소요 시간: <span id="finalTime">0</span>초</p>
+            <div class="save-score">
+                <input type="text" id="playerNameInput" placeholder="이름 (선택사항)" maxlength="20">
+                <button id="saveScoreBtn">점수 저장</button>
+            </div>
+            <button id="playAgainBtn">다시 하기</button>
+        </div>
+        <div id="leaderboard" class="leaderboard hidden">
+            <h2>🏆 리더보드</h2>
+            <div class="leaderboard-controls">
+                <button id="closeLeaderboardBtn">닫기</button>
+                <button id="refreshLeaderboardBtn">새로고침</button>
+            </div>
+            <div id="leaderboardList" class="leaderboard-list"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="game.js"></script>
+</body>
+</html>
