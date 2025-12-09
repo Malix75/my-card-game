@@ -48,8 +48,8 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- Supabase 설정: Vercel 환경 변수에서 자동 주입됨 (빌드 시) -->
-    <!-- 로컬 개발 시에는 config.js 파일을 사용하세요 -->
+    <!-- Supabase 설정: 우선순위 1) supabase-config.js (빌드 시 생성) 2) config.js (로컬 개발) -->
+    <script src="supabase-config.js" onerror="console.log('supabase-config.js를 찾을 수 없습니다. config.js를 사용합니다.');"></script>
     <script src="config.js"></script>
     <script src="game.js"></script>
 </body>

@@ -1,5 +1,6 @@
 # Supabase 설정 파일 (보안상 커밋하지 않음)
 config.js
+supabase-config.js
 
 # 운영체제 파일
 .DS_Store
