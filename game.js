@@ -1,7 +1,29 @@
-// Supabase 설정
-const SUPABASE_URL = 'https://nhcujvksmmfzxysqqkpq.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_VtDpCpEZyS5Ij51SYtH0RA_eC7pyF-w';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// Supabase 설정 (config.js에서 로드)
+// config.js 파일이 없으면 config.example.js를 참고하여 생성하세요.
+let supabase;
+try {
+    if (typeof SUPABASE_CONFIG !== 'undefined') {
+        supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
+    } else {
+        console.warn('Supabase 설정이 없습니다. config.js 파일을 확인하세요.');
+        // Supabase 기능을 사용하지 않는 경우를 위한 더미 객체
+        supabase = {
+            from: () => ({
+                insert: () => Promise.resolve({ data: null, error: { message: 'Supabase not configured' } }),
+                select: () => ({
+                    order: () => ({
+                        order: () => ({
+                            limit: () => Promise.resolve({ data: [], error: null })
+                        })
+                    })
+                })
+            })
+        };
+    }
+} catch (error) {
+    console.error('Supabase 초기화 오류:', error);
+    supabase = null;
+}
 
 // Canvas 및 게임 설정
 const canvas = document.getElementById('gameCanvas');

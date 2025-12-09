@@ -25,11 +25,32 @@ Canvas API와 JavaScript로 구현한 인터랙티브 카드 뒤집기 메모리
 1. 저장소를 클론합니다:
 ```bash
 git clone https://github.com/Malix75/my-card-game.git
+cd my-card-game
 ```
 
-2. `index.html` 파일을 브라우저에서 엽니다
+2. Supabase 설정 파일을 생성합니다:
+```bash
+# config.example.js를 복사하여 config.js 생성
+cp config.example.js config.js
+```
+
+3. `config.js` 파일을 열고 Supabase 프로젝트 정보를 입력합니다:
+```javascript
+const SUPABASE_CONFIG = {
+    url: 'https://your-project-id.supabase.co',
+    key: 'sb_publishable_your_key_here'
+};
+```
+
+4. `index.html` 파일을 브라우저에서 엽니다
 
 또는 GitHub Pages나 Vercel, Netlify 등의 플랫폼에 배포하여 사용할 수 있습니다.
+
+### ⚠️ 보안 주의사항
+
+- `config.js` 파일은 `.gitignore`에 포함되어 있어 Git에 커밋되지 않습니다.
+- Supabase Publishable Key는 클라이언트에 노출되어도 안전하지만, 보안을 위해 별도 파일로 관리하는 것을 권장합니다.
+- 배포 시에는 환경 변수나 배포 플랫폼의 설정 기능을 사용하세요.
 
 ## 🛠 기술 스택
 
@@ -42,10 +63,13 @@ git clone https://github.com/Malix75/my-card-game.git
 
 ```
 my-card-game/
-├── index.html      # 메인 HTML 파일
-├── style.css       # 스타일시트
-├── game.js         # 게임 로직 및 Canvas 렌더링
-└── README.md       # 프로젝트 설명
+├── index.html          # 메인 HTML 파일
+├── style.css           # 스타일시트
+├── game.js             # 게임 로직 및 Canvas 렌더링
+├── config.example.js   # Supabase 설정 예제 파일
+├── config.js           # Supabase 설정 파일 (로컬에서 생성, .gitignore)
+├── .gitignore          # Git 무시 파일 목록
+└── README.md           # 프로젝트 설명
 ```
 
 ## 🎨 특징
